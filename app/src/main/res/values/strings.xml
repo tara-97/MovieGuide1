@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MovieGuide</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Top Rated</string>
+    <string name="tab_text_2">Popular</string>
+    <string name="tab_text_3">Latest</string>
+    <string name="tab_text_4">Now Playing</string>
+    <string name="tab_text_5">Upcoming</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="movie_detail_tab_1">Info</string>
+    <string name="movie_detail_tab_2">Cast</string>
+    <!-- Strings used for fragments for navigation -->
+
+
+</resources>
