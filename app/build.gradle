@@ -47,8 +47,10 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
     implementation 'androidx.preference:preference:1.1.0'
     implementation "androidx.room:room-runtime:2.2.5"
-    implementation "androidx.paging:paging-runtime:2.1.2"
-    annotationProcessor "androidx.room:room-compiler:2.2.5"
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha07"
+    implementation "androidx.paging:paging-rxjava3:3.0.0-alpha07"
+
+
 
 
 

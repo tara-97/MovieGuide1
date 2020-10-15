@@ -1,39 +1,36 @@
 package com.example.android.movieguide.ui.main;
-import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.paging.Pager;
+import androidx.paging.PagingConfig;
+import androidx.paging.PagingData;
+import androidx.paging.rxjava3.PagingRx;
 
-import com.example.android.movieguide.DataRepository;
 import com.example.android.movieguide.Networkutil.Movie;
+import com.example.android.movieguide.PagedData.PagedMovieDataSource;
 
-
-
-import java.util.List;
+import io.reactivex.rxjava3.core.Observable;
 
 
 public class PageViewModel extends ViewModel {
     private static final String TAG = "PageViewModel";
-    private DataRepository mRepository;
-    private LiveData<List<Movie>> moviesList;
-    private LiveData<Movie> singleMovie;
-    public PageViewModel(){
+    private Observable<PagingData<Movie>> movieObserverable;
+
+    public PageViewModel() {
         super();
-        mRepository=DataRepository.getInstance();
-        moviesList=mRepository.getAllMovies();
-        singleMovie=mRepository.getMovie();
     }
 
-
-    public LiveData<List<Movie>> getMovieList() {
-        return moviesList;
-    }
 
     public void setPath(String path) {
-        mRepository.setPath(path);
+        Pager<Integer, Movie> pager = new Pager(
+                new PagingConfig(20),
+                () -> new PagedMovieDataSource(path));
+        movieObserverable = PagingRx.getObservable(pager);
+
     }
-    public LiveData<Movie> getMovie(){
-        return singleMovie;
+
+    public Observable<PagingData<Movie>> getMovieData() {
+        return movieObserverable;
     }
 }
 

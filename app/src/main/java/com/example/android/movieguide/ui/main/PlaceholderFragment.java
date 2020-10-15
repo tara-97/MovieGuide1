@@ -1,23 +1,19 @@
 package com.example.android.movieguide.ui.main;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.movieguide.MovieRecyclerViewAdapter;
-import com.example.android.movieguide.Networkutil.Movie;
+import com.example.android.movieguide.PagedData.MovieComparator;
 import com.example.android.movieguide.R;
-
-import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -57,21 +53,9 @@ public class PlaceholderFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         final RecyclerView mRecyclerView=root.findViewById(R.id.rv_movie_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MovieRecyclerViewAdapter movieAdapter=new MovieRecyclerViewAdapter(getContext());
+        MovieRecyclerViewAdapter movieAdapter = new MovieRecyclerViewAdapter(new MovieComparator(), getContext());
         mRecyclerView.setAdapter(movieAdapter);
-        pageViewModel.getMovieList().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                movieAdapter.setData(movies);
-            }
-        });
-        pageViewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
-            @Override
-            public void onChanged(Movie movie) {
-                Log.d(TAG, "onChanged: Called");
-                movieAdapter.update(movie);
-            }
-        });
+        pageViewModel.getMovieData().subscribe(moviePagingData -> movieAdapter.submitData(getLifecycle(), moviePagingData));
         return root;
     }
 }
