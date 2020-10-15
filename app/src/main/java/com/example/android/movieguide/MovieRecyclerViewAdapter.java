@@ -45,6 +45,7 @@ public class MovieRecyclerViewAdapter extends PagingDataAdapter<Movie, MovieRecy
         private TextView movieYrOfRls;
         private TextView movieRating;
         private TextView movieGenre;
+        private int position;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +55,7 @@ public class MovieRecyclerViewAdapter extends PagingDataAdapter<Movie, MovieRecy
             movieYrOfRls=itemView.findViewById(R.id.tv_mv_yr);
             movieGenre=itemView.findViewById(R.id.tv_mv_genre);
             itemView.setOnClickListener(this);
+
 
         }
         public void bind(Movie movie,int pos){
@@ -66,11 +68,12 @@ public class MovieRecyclerViewAdapter extends PagingDataAdapter<Movie, MovieRecy
                 movieGenre.setText(movie.getGenreNames());
             }
             Glide.with(context).load(movie.getPosterPath()).placeholder(R.drawable.ic_launcher_background).fitCenter().into(moviePoster);
+            position = pos;
         }
 
          @Override
          public void onClick(View v) {
-             mcallback.onDataClicked(topRatedMovies.get(getAdapterPosition()).getId());
+             mcallback.onDataClicked(getItem(position).getId());
          }
 
      }
