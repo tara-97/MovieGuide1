@@ -12,6 +12,8 @@ ________________
 <li>Android Artitechture Component
 <li>Glide
 <li>Retrofit
+<li>Pagination
+<li>Gson
 <ul>
 <br>
 
